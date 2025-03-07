@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router';
 import Layout from './layouts/Layout';
+import Auth from './views/Auth';
 
 // description : 
 
@@ -24,7 +25,7 @@ import Layout from './layouts/Layout';
 function App() {
   return (
     <Routes>
-      <Route path={'auth'} element={<>로그인 회원가입 페이지</>} />
+      <Route path={'auth'} element={<Auth />} />
 
       <Route element={<Layout />}>
         <Route path={'main'} element={<>메인페이지</>} />
