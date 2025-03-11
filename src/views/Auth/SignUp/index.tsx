@@ -50,30 +50,36 @@ export default function SignUp(props: Props) {
   // variable: 중복 확인 버튼 활성화 //
   const isUserIdCheckButtonActive = userId !== '';
   // variable: 회원가입 버튼 활성화 //
-  const signUpButtonActive = 
+  const isSignUpButtonActive = 
     userName && userId && userPassword && userPasswordCheck && userAddress && 
     isUserIdChecked && isUserPasswordChecked && isUserPasswordEqual;
   // variable: 회원가입 버튼 클래스 //
-  const signUpButtonClass = `button ${signUpButtonActive ? 'primary' : 'disable'} fullwidth`;
+  const signUpButtonClass = `button ${isSignUpButtonActive ? 'primary' : 'disable'} fullwidth`;
   
   // function: 다음 포스트 코드 팝업 오픈 함수 //
   const open = useDaumPostcodePopup();
-
   // function: 다음 포스트 코드 완료 처리 함수 //
   const daumPostCompleteHandler = (data: Address) => {
     const { address } = data;
     setUserAddress(address);
+    setUserAddressMessgae('');
   };
   
   // event handler: 사용자 이름 변경 이벤트 처리 //
   const onUserNameChangeHandler = (evnet: ChangeEvent<HTMLInputElement>) => {
     const { value } = evnet.target;
     setUserName(value);
+    
+    setUserNameMessage('');
   };
   // event handler: 사용자 아이디 변경 이벤트 처리 //
   const onUserIdChangeHandler = (evnet: ChangeEvent<HTMLInputElement>) => {
     const { value } = evnet.target;
     setUserId(value);
+
+    setUserIdChecked(false);
+    setUserIdMessgae('');
+    setUserIdMessageError(false);
   };
   // event handler: 사용자 비밀번호 변경 이벤트 처리 //
   const onUserPasswordChangeHandler = (evnet: ChangeEvent<HTMLInputElement>) => {
@@ -84,6 +90,7 @@ export default function SignUp(props: Props) {
     const isMatch = regexp.test(value);
     const message = isMatch ? '' : '영문, 숫자를 혼용하여 8 ~ 13자 입력해주세요.';
     setUserPasswordMessgae(message);
+    setUserPasswordChecked(isMatch);
   };
   // event handler: 사용자 비밀번호 확인 변경 이벤트 처리 //
   const onUserPasswordCheckChangeHandler = (evnet: ChangeEvent<HTMLInputElement>) => {
@@ -100,16 +107,34 @@ export default function SignUp(props: Props) {
     const { value } = evnet.target;
     setUserDetailAddress(value);
   };
-
   // event handler: 중복 확인 버튼 클릭 이벤트 처리 //
   const onCheckUserIdClickHandler = () => {
     if (!isUserIdCheckButtonActive) return;
-    alert('중복 확인 버튼 클릭!');
+    
+    const idList = ['qwer1234', 'rewq4321', 'poiu0987'];
+    const isExist = idList.includes(userId);
+    
+    const message = isExist ? '이미 사용중인 아이디입니다.' : '사용 가능한 아이디입니다.';
+    setUserIdMessgae(message);
+    setUserIdMessageError(isExist);
+    setUserIdChecked(!isExist);
   };
-
   // event handler: 주소 검색 버튼 클릭 이벤트 처리 //
   const onSearchAddressClickHandler = () => {
     open({ onComplete: daumPostCompleteHandler });
+  };
+  // event handler: 회원가입 버튼 이벤트 처리 //
+  const onSignUpClickHandler = () => {
+    if (!userName) setUserNameMessage('이름을 입력해주세요.');
+    if (!userPassword) setUserPasswordMessgae('비밀번호를 입력해주세요.');
+    if (!userAddress) setUserAddressMessgae('주소를 입력해주세요.');
+    if (!isUserIdChecked) {
+      setUserIdMessgae('아이디 중복 확인해주세요.');
+      setUserIdMessageError(true);
+    }
+    if (!isSignUpButtonActive) return;
+
+    alert('회원가입!');
   };
 
   // effect: 사용자 비밀번호 또는 사용자 비밀번호 확인이 변경될시 실행할 함수 //
@@ -117,6 +142,7 @@ export default function SignUp(props: Props) {
     const isMatch = userPasswordCheck === userPassword;
     const message = isMatch ? '' : '비밀번호가 일치하지 않습니다.';
     setUserPasswordCheckMessgae(message);
+    setUserPasswordEqual(isMatch);
   },[userPassword, userPasswordCheck])
 
   // render: 회원가입 컴포넌트 렌더링 //
@@ -145,7 +171,7 @@ export default function SignUp(props: Props) {
         <InputBox label={'상세 주소'} type={'text'} value={userDetailAddress} placeholder={'상세 주소를 입력해주세요.'} onChange={onUserDetailAddressChangeHandler} message={''} />
       </div>
       <div className='button-container'>
-        <div className={signUpButtonClass}>회원가입</div>
+        <div className={signUpButtonClass} onClick={onSignUpClickHandler}>회원가입</div>
         <div className='link' onClick={() => onPageChange('sign-in')}>로그인</div>
       </div>
     </div>
