@@ -67,7 +67,7 @@ body {
 .button.primary {
   background-color: var(--Primary);
 
-  color: var(--white);
+  color: var(--White);
 }
 
 .link {
