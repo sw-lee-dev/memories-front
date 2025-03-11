@@ -81,6 +81,7 @@ export default function SignUp(props: Props) {
     setUserIdMessgae('');
     setUserIdMessageError(false);
   };
+
   // event handler: 사용자 비밀번호 변경 이벤트 처리 //
   const onUserPasswordChangeHandler = (evnet: ChangeEvent<HTMLInputElement>) => {
     const { value } = evnet.target;
@@ -97,6 +98,7 @@ export default function SignUp(props: Props) {
     const { value } = evnet.target;
     setUserPasswordCheck(value);
   };
+
   // event handler: 사용자 주소 변경 이벤트 처리 //
   const onUserAddressChangeHandler = (evnet: ChangeEvent<HTMLInputElement>) => {
     const { value } = evnet.target;
@@ -107,6 +109,7 @@ export default function SignUp(props: Props) {
     const { value } = evnet.target;
     setUserDetailAddress(value);
   };
+  
   // event handler: 중복 확인 버튼 클릭 이벤트 처리 //
   const onCheckUserIdClickHandler = () => {
     if (!isUserIdCheckButtonActive) return;

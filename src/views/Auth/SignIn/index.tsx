@@ -32,7 +32,6 @@ export default function SignIn(props: Props) {
     const { value } = event.target;
     setUserPassword(value);
   };
-
   // event handler: 로그인 버튼 클릭 이벤트 처리 //
   const onLoginButtonClick = () => {
     if (!userId) setUserIdMessage('아이디를 입력하세요.');
