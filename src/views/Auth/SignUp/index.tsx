@@ -3,6 +3,9 @@ import './style.css';
 import { AuthPage } from 'src/types/aliases';
 import InputBox from 'src/components/InputBox';
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
+import { idCheckRequest } from 'src/apis';
+import { IdCheckRequestDto } from 'src/apis/dto/request/auth';
+import { ResponseDto } from 'src/apis/dto/response';
 
 // interface: 회원가입 컴포넌트 속성 //
 interface Props {
@@ -64,6 +67,22 @@ export default function SignUp(props: Props) {
     setUserAddress(address);
     setUserAddressMessgae('');
   };
+  // function: id check response 처리 함수 //
+  const idCheckResponse = (responseBody: ResponseDto | null) => {
+
+    const message = 
+      !responseBody ? '서버에 문제가 있습니다.' :
+      responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' :
+      responseBody.code === 'EU' ? '이미 사용중인 아이디입니다.' :
+      responseBody.code === 'VF' ? '아이디를 입력하세요.' :
+      '사용 가능한 아이디입니다.';
+
+    const isSuccess = responseBody !== null && responseBody.code === 'SU';
+
+    setUserIdMessgae(message);
+    setUserIdMessageError(!isSuccess);
+    setUserIdChecked(isSuccess);
+  };
   
   // event handler: 사용자 이름 변경 이벤트 처리 //
   const onUserNameChangeHandler = (evnet: ChangeEvent<HTMLInputElement>) => {
@@ -114,19 +133,14 @@ export default function SignUp(props: Props) {
   const onCheckUserIdClickHandler = () => {
     if (!isUserIdCheckButtonActive) return;
     
-    const idList = ['qwer1234', 'rewq4321', 'poiu0987'];
-    const isExist = idList.includes(userId);
-    
-    const message = isExist ? '이미 사용중인 아이디입니다.' : '사용 가능한 아이디입니다.';
-    setUserIdMessgae(message);
-    setUserIdMessageError(isExist);
-    setUserIdChecked(!isExist);
+    const requestBody: IdCheckRequestDto = { userId };
+    idCheckRequest(requestBody).then(idCheckResponse);
   };
   // event handler: 주소 검색 버튼 클릭 이벤트 처리 //
   const onSearchAddressClickHandler = () => {
     open({ onComplete: daumPostCompleteHandler });
   };
-  // event handler: 회원가입 버튼 이벤트 처리 //
+  // event handler: 회원가입 버튼 클릭 이벤트 처리 //
   const onSignUpClickHandler = () => {
     if (!userName) setUserNameMessage('이름을 입력해주세요.');
     if (!userPassword) setUserPasswordMessgae('비밀번호를 입력해주세요.');
