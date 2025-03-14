@@ -4,9 +4,7 @@ import { Route, Routes } from 'react-router';
 import Layout from './layouts/Layout';
 import Auth from './views/Auth';
 
-// description : 
-
-// Router 구성
+// description: Router 구성 //
 // - /auth : 로그인 및 회원가입 페이지
 
 // - /main : 메인 페이지
