@@ -42,8 +42,8 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 };
 // function: sign in API 요청 함수 //
 export const singInRequest = async (requestBody: SignInRequestDto) => {
-  const responsnBody = await axios.post(SIGN_IN_URL, requestBody)
+  const responseBody = await axios.post(SIGN_IN_URL, requestBody)
     .then(responseSuccessHandler<SignInResponseDto>)
     .catch(responseErrorHandler);
-  return responsnBody;
+  return responseBody;
 };
