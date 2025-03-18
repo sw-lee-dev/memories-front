@@ -5,6 +5,7 @@ import Layout from './layouts/Layout';
 import Auth from './views/Auth';
 import { ACCESS_TOKEN, AUTH_ABSOLUTE_PATH, AUTH_PATH, CONCENTRATION_TEST_COMPLETE_PATH, CONCENTRATION_TEST_PATH, DIARY_PATH, DIARY_UPDATE_PATH, DIARY_VIEW_PATH, DIARY_WRITE_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MEMORY_TEST_COMPLETE_PATH, MEMORY_TEST_PATH, OTHERS_PATH } from './constants';
 import { useCookies } from 'react-cookie';
+import DiaryMain from './views/Diary';
 
 // description: Router 구성 //
 // - /auth : 로그인 및 회원가입 페이지
@@ -43,7 +44,7 @@ function App() {
         </Route>
 
         <Route path={DIARY_PATH}>
-          <Route index element={<>일기 메인 페이지</>} />
+          <Route index element={<DiaryMain />} />
           <Route path={DIARY_WRITE_PATH} element={<>일기 작성 페이지</>} />
           <Route path={DIARY_VIEW_PATH}>
             <Route index element={<>일기 보기 페이지</>} />
