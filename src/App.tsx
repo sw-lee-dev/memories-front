@@ -23,24 +23,6 @@ import { useCookies } from 'react-cookie';
 // - /diary/:diaryNumber/update : 일기 수정 페이지
 
 function App() {
-  // 경로 변경을 App() 에서 바로 사용할 수도 있음
-  // // state: cookie 상태 //
-  // const [cookies] = useCookies();
-  // // state: 경로 상태 //
-  // const { pathname } = useLocation();
-  
-  // // function: 네비게이터 함수 //
-  // const navigator = useNavigate();
-
-  // // effect: 컴포넌트 렌더링 될 때 실행할 함수 //
-  // useEffect(() => {
-  //   if (!cookies[ACCESS_TOKEN] && pathname !== AUTH_ABSOLUTE_PATH) {
-  //     navigator(AUTH_ABSOLUTE_PATH);
-  //   }
-  //   if (cookies[ACCESS_TOKEN] && pathname === ROOT_ABSOLUTE_PATH) {
-  //     navigator(MAIN_PATH);
-  //   }
-  // },[]);
 
   return (
     <Routes>
@@ -97,3 +79,22 @@ function Index() {
 }
 
 /*처음에 App return 내용 다 지우고 <></> 빈 태그 입력*/
+
+/*경로 변경을 App() 아래에서 바로 사용할 수도 있음*/
+// // state: cookie 상태 //
+// const [cookies] = useCookies();
+// // state: 경로 상태 //
+// const { pathname } = useLocation();
+
+// // function: 네비게이터 함수 //
+// const navigator = useNavigate();
+
+// // effect: 컴포넌트 렌더링 될 때 실행할 함수 //
+// useEffect(() => {
+//   if (!cookies[ACCESS_TOKEN] && pathname !== AUTH_ABSOLUTE_PATH) {
+//     navigator(AUTH_ABSOLUTE_PATH);
+//   }
+//   if (cookies[ACCESS_TOKEN] && pathname === ROOT_ABSOLUTE_PATH) {
+//     navigator(MAIN_PATH);
+//   }
+// },[]);
