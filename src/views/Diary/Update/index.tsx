@@ -10,6 +10,7 @@ import { getDiaryRequest, patchDiaryRequest } from 'src/apis';
 import { GetDiaryReponseDto } from 'src/apis/dto/response/diary';
 import { ResponseDto } from 'src/apis/dto/response';
 import { PatchDiaryRequestDto } from 'src/apis/dto/request/diary';
+import { useSignInUserStore } from 'src/stores';
 
 // component: 일기 수정 화면 컴포넌트 //
 export default function DiaryUpdate() {
@@ -20,7 +21,11 @@ export default function DiaryUpdate() {
   // state: cookie 상태 //
   const [cookies] = useCookies();
 
+  // state: 로그인 유저 아이디 상태 //
+  const { userId } = useSignInUserStore();
+
   // state: 일기 수정 내용 상태 //
+  const [writerId, setWriterId] = useState<string>('');
   const [writeDate, setWriteDate] = useState<string>('');
   const [weather, setWeather] = useState<Weather | ''>('');
   const [feeling, setFeeling] = useState<Feeling | ''>('');
@@ -81,7 +86,8 @@ export default function DiaryUpdate() {
       return;
     }
 
-    const { writeDate, weather, feeling, title, content } = responseBody as GetDiaryReponseDto;
+    const { writerId, writeDate, weather, feeling, title, content } = responseBody as GetDiaryReponseDto;
+    setWriterId(writerId);
     setWriteDate(writeDate);
     setWeather(weather);
     setFeeling(feeling);
@@ -140,6 +146,14 @@ export default function DiaryUpdate() {
     if (!accessToken || !diaryNumber) return;
     getDiaryRequest(diaryNumber, accessToken).then(getDiaryResponse);
   }, [diaryNumber]);
+  
+  // effect: 로그인 유저 아이디와 작성자 아이디가 변경될 시 실행할 함수 //
+  useEffect(() => {
+    if (writerId && userId && writerId !== userId) {
+      alert('권한이 없습니다.');
+      navigator(DIARY_ABSOLUTE_PATH);
+    }
+  }, [writerId, userId]);
   
   // render: 일기 수정 화면 컴포넌트 렌더링 //
   return (
