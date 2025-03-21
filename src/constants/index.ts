@@ -3,7 +3,7 @@ export const ROOT_PATH = '/';
 export const AUTH_PATH = 'auth';
 export const MAIN_PATH = 'main';
 export const MEMORY_TEST_PATH = 'memeory-test';
-export const MEMORY_TEST_COMPLETE_PATH = 'compelete';
+export const MEMORY_TEST_COMPLETE_PATH = 'complete';
 export const CONCENTRATION_TEST_PATH = 'concentration-test';
 export const CONCENTRATION_TEST_COMPLETE_PATH = 'complete';
 export const DIARY_PATH = 'diary';
@@ -33,3 +33,6 @@ export const JOIN_TYPE = 'joinType';
 
 // variable: sns id 속성명 //
 export const SNS_ID = 'snsId';
+
+// variable: 기억력 검사 설명 //
+export const MEMORY_DESCRIPTION =  '16개의 뒤집혀진 카드의 앞면을 기억하여\n동일한 앞면의 카드 두 개를 연속해서 뒤집어\n모두 앞면으로 돌리면 성공입니다.\n검사 시작부터 모두 돌리는데 까지 걸린 시간을 측정합니다.'
