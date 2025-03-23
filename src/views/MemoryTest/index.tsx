@@ -21,12 +21,11 @@ function Card({ memoryCard, onClick }: CardProps) {
 
   const { id, color, isReverse } = memoryCard;
 
+  // render: 메모리 검사 카드 컴포넌트 렌더링 //
   if (isReverse)
   return(
     <div className='reversed-card' onClick={() => onClick(id)}></div>
   )
-
-  // render: 메모리 검사 카드 컴포넌트 렌더링 //
   return (
     <div style={{ backgroundColor: color }}></div>
   )
