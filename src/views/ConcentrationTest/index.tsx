@@ -10,9 +10,9 @@ import { ResponseDto } from 'src/apis/dto/response';
 import { useNavigate } from 'react-router';
 
 // variable: 전체 시간 (60초) //
-const TOTAL_TIME = 60 * 1000;
-// variable: 별 표시 시간 (0.4초) //
-const STAR_TIME = 400;
+const TOTAL_TIME = 40 * 1000;
+// variable: 별 표시 시간 (0.5초) //
+const STAR_TIME = 500;
 // variable: 별 표시 횟수 (20번) //
 const STAR_COUNT = 20;
 
@@ -77,23 +77,28 @@ export default function ConcentrationTest() {
   // effect: 검사 시작 상태가 변경될 시 실행할 함수 //
   useEffect(() => {
     reset();
+    let interval: NodeJS.Timeout;
     if (isStarted) {
       init();
 
       setTimeout(() => {
         setFinish(true);
-      }, TOTAL_TIME);
+      }, TOTAL_TIME + STAR_TIME);
 
-      setInterval(() => {
+      interval = setInterval(() => {
         setStarVisible(true);
         clickRef.current = false;
 
         setTimeout(() => {
           if (!clickRef.current) increaseErrorCount();
           setStarVisible(false);
-        },STAR_TIME);
+        }, STAR_TIME);
 
       }, Math.floor(TOTAL_TIME / STAR_COUNT));
+    }
+
+    return () => {
+      clearInterval(interval);
     }
   }, [isStarted]);
 
@@ -133,7 +138,7 @@ export default function ConcentrationTest() {
             <div className='rectangle' onClick={onIconClickHandler}></div>
             }
           </div> :
-          <div className='button primary middle' onClick={onStartClickHandler}>검사 시작</div>          
+          <div className='button primary middle' onClick={onStartClickHandler}>검사 시작</div>         
           }
         </div>
       </div>

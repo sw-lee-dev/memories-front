@@ -105,7 +105,7 @@ export default function MemoryTestComplete() {
         <div className='test-result-table'>
           <div className='tr'>
             <div className='th memory-sequence'>순번</div>
-            <div className='th memeory-test-date'>검사 날짜</div>
+            <div className='th memory-test-date'>검사 날짜</div>
             <div className='th measurement-time'>소요 시간</div>
             <div className='th gap'>차이</div>
           </div>
