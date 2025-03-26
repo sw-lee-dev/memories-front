@@ -11,8 +11,13 @@ import { ACCESS_TOKEN } from 'src/constants';
 import { useSignInUser } from 'src/hooks';
 import { useSignInUserStore } from 'src/stores';
 
+// interface: 로그인 사용자 정보 수정 컴포넌트 속성 //
+interface UserUpdateProps {
+  onModalViewChange: () => void;
+}
+
 // component: 로그인 사용자 정보 수정 컴포넌트 //
-function UserUpdate() {
+function UserUpdate({onModalViewChange}: UserUpdateProps) {
 
   // state: cookie 상태 //
   const [cookies] = useCookies();
@@ -75,6 +80,7 @@ function UserUpdate() {
     }
 
     getSignInUser();
+    onModalViewChange();
   };
 
   // event handler: 프로필 사진 클릭 이벤트 처리 //
@@ -138,16 +144,18 @@ function UserUpdate() {
       return;
     }
 
-    let profileImage: string | null = null;
+    let newProfileImage: string | null = null;
     if (profileImageFile) {
       const formData = new FormData();
       formData.append('file', profileImageFile);
-      profileImage = await fileUploadRequest(formData);
+      newProfileImage = await fileUploadRequest(formData);
     }
+
+    newProfileImage = profileImage === previewProfile ? profileImage : newProfileImage;
 
     const requestBody: PatchUserRequestDto = {
       name: updateName, 
-      profileImage, 
+      profileImage: newProfileImage, 
       gender: updateGender, 
       address: updateAddress, 
       detailAddress: updateDetailAddress, 
@@ -238,7 +246,7 @@ export default function UserInfo() {
       <div className='button second middle' onClick={onUpdateOpenButtonClickHandler}>수정</div>
       {isUpdateOpen &&
       <Modal title='회원 정보 수정' onClose={onUpdateOpenButtonClickHandler}>
-        <UserUpdate />
+        <UserUpdate onModalViewChange={onUpdateOpenButtonClickHandler} />
       </Modal>
       }
     </div>
