@@ -15,7 +15,6 @@ interface Props {
   type: '기억력' | '집중력';
 }
 
-
 // component: 기억력을 높이는 방법 컴포넌트 //
 export default function Way({type}: Props) {
 
