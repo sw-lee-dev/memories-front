@@ -4,7 +4,7 @@ import { IdCheckRequestDto, SignInRequestDto, SignUpRequestDto } from './dto/req
 import { ResponseDto } from './dto/response';
 import { SignInResponseDto } from './dto/response/auth';
 import { PatchDiaryRequestDto, PostDiaryRequestDto } from './dto/request/diary';
-import { GetDiaryReponseDto, GetEmpathyResponseDto, GetMyDiaryResponseDto } from './dto/response/diary';
+import { GetDiaryResponseDto, GetEmpathyResponseDto, GetMyDiaryResponseDto } from './dto/response/diary';
 import { GetSignInUserResponseDto } from './dto/response/user';
 import { PostConcentrationRequestDto, PostMemoryRequestDto } from './dto/request/test';
 import { GetConcentrationResponseDto, GetMemoryResponseDto, GetRecentlyConcentrationResponseDto, GetRecentlyMemoryResponseDto } from './dto/response/test';
@@ -112,7 +112,7 @@ export const getMyDiaryRequest = async (accessToken: string) => {
 // function: get diary API 요청 함수 //
 export const getDiaryRequest = async (diaryNumber: number | string, accessToken: string) => {
   const responseBody = await axios.get(GET_DIARY_URL(diaryNumber), bearerAuthorization(accessToken))
-    .then(responseSuccessHandler<GetDiaryReponseDto>)
+    .then(responseSuccessHandler<GetDiaryResponseDto>)
     .catch(responseErrorHandler);
   return responseBody;
 };

@@ -6,7 +6,7 @@ import { deleteDiaryRequest, getDiaryRequest, getEmpathyRequest } from 'src/apis
 import { useCookies } from 'react-cookie';
 import { ACCESS_TOKEN, DIARY_ABSOLUTE_PATH, DIARY_UPDATE_ABSOLUTE_PATH } from 'src/constants';
 import { useNavigate, useParams } from 'react-router';
-import { GetDiaryReponseDto, GetEmpathyResponseDto } from 'src/apis/dto/response/diary';
+import { GetDiaryResponseDto, GetEmpathyResponseDto } from 'src/apis/dto/response/diary';
 import { ResponseDto } from 'src/apis/dto/response';
 import { useSignInUserStore } from 'src/stores';
 
@@ -58,7 +58,7 @@ export default function DiaryDetail() {
   const navigator = useNavigate();
 
   // function: get diary response 처리 함수 //
-  const getDiaryResponse = (responseBody: GetDiaryReponseDto | ResponseDto | null) => {
+  const getDiaryResponse = (responseBody: GetDiaryResponseDto | ResponseDto | null) => {
     const message = 
       !responseBody ? '서버에 문제가 있습니다.' : 
       responseBody.code === 'DBE' ? '서버에 문제가 있습니다.' : 
@@ -72,7 +72,7 @@ export default function DiaryDetail() {
       return;
     }
 
-    const { writerId, writeDate, weather, feeling, title, content } = responseBody as GetDiaryReponseDto;
+    const { writerId, writeDate, weather, feeling, title, content } = responseBody as GetDiaryResponseDto;
     setWriterId(writerId);
     setWriteDate(writeDate);
     setWeather(weather);
