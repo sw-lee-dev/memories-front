@@ -159,7 +159,7 @@ function UserUpdate({onModalViewChange}: UserUpdateProps) {
       gender: updateGender, 
       address: updateAddress, 
       detailAddress: updateDetailAddress, 
-      age: updateAge ? Number(age) : null
+      age: updateAge ? Number(updateAge) : null
     };
 
     patchUserReqeust(requestBody, accessToken).then(patchUserResponse);
