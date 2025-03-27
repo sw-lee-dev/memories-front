@@ -51,7 +51,6 @@
 
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
 }
 
 #diary-detail-wrapper .button-box {
@@ -152,7 +151,9 @@
 
   font-size: 16px;
   font-weight: 400;
-  line-height: 125%;
+  line-height: 175%;
+
+  white-space: pre-wrap;
 }
 
 #diary-detail-wrapper .sub-container .footer {
