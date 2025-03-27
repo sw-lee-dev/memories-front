@@ -43,6 +43,11 @@ body {
   opacity: 0.85;
 }
 
+.button.stratch {
+  height: 100%;
+  align-self: stretch;
+}
+
 .button.fullwidth {
   box-sizing: border-box;
   width: 100%;
