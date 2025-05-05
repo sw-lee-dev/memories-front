@@ -16,6 +16,7 @@ Front-end 프로젝트
 - 기억력 검사
 - 집중력 검사
 - 일기 작성, 수정, 삭제, 보기
+- 일기 좋아요, 댓글
 - Chat GPT API 활용 기억력 및 집중력 향상 방법 제공
 
 ## 🟡 기술 스택
@@ -57,6 +58,41 @@ npm run build
 ```md
 📂 memories-front
 ├ 📂 src
+│ ├ 📂 apis
+│ │ └ 📂 dto
+│ ├ 📂 assets
+│ │ ├ 📂 fonts
+│ │ └ 📂 images
+│ ├ 📂 components
+│ │ ├ 📂 InputBox
+│ │ ├ 📂 Modal
+│ │ ├ 📂 Pagination
+│ │ ├ 📂 TextEditor
+│ │ └ 📂 Way
+│ ├ 📂 constants
+│ ├ 📂 hooks
+│ ├ 📂 layouts
+│ ├ 📂 stores
+│ ├ 📂 types
+│ │ ├ 📂 aliases
+│ │ └ 📂 interfaces
+│ ├ 📂 utils
+│ └ 📂 views
+│   ├ 📂 Auth
+│   │ ├ 📂 SignIn
+│   │ └ 📂 SignUp
+│   ├ 📂 ConcentrationTest
+│   │ └ 📂 Complete
+│   ├ 📂 Diary
+│   │ ├ 📂 Detail
+│   │ ├ 📂 Update
+│   │ └ 📂 Write
+│   ├ 📂 Main
+│   │ ├ 📂 RecentlyConcentration
+│   │ ├ 📂 RecentlyMemory
+│   │ └ 📂 UserInfo
+│   └ 📂 MemoryTest
+│     └ 📂 Complete
 ├ 📂 public
 ├ 📄 package.json
 └ 📄 tsconfig.json
